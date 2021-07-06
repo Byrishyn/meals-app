@@ -10,7 +10,7 @@ import MealsDetailScreen from "../screens/MealsDetailScreen"
 const MealsNavigator = createStackNavigator({
     Categories: {screen: CategoriesScreen, navigationOptions: {headerTitle: "Meal Categories"}},
     CategoryMeals: {screen: CategoryMealsScreen},
-    MealsDetail: {screen: MealsDetailScreen},
+    MealDetail: {screen: MealsDetailScreen},
     
 }, {defaultNavigationOptions : {
     headerStyle : {
