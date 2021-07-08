@@ -26,6 +26,19 @@ const MealsNavigator = createStackNavigator({
   }
 });
 
+const FavoritesNavigator = createStackNavigator({
+  Favorites: { screen: FavoritesScreen },
+  MealDetail: { screen: MealsDetailScreen }
+}, {
+  defaultNavigationOptions: {
+    headerStyle: {
+      backgroundColor: Platform.OS === "android" ? Colors.primaryColor : ""
+    },
+    headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor
+  }
+});
+
+
 const tabScreenConfig = {
   Meals: {
     screen: MealsNavigator, navigationOptions: {
@@ -35,7 +48,7 @@ const tabScreenConfig = {
     }
   },
   Favorites: {
-    screen: FavoritesScreen, navigationOptions: {
+    screen: FavoritesNavigator, navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />
       }
@@ -47,11 +60,11 @@ const MealsFavTabNavigator = Platform.OS === "android"
   ? createMaterialBottomTabNavigator(tabScreenConfig, {
     activeTintColor: Colors.accentColor,
     shifting: false,
-    barStyle :{ 
+    barStyle: {
       backgroundColor: Colors.primaryColor
     }
   })
-  : createBottomTabNavigator( tabScreenConfig, {
+  : createBottomTabNavigator(tabScreenConfig, {
     tabBarOptions: {
       activeTintColor: Colors.accentColor,
     }
