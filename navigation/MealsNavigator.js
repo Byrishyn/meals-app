@@ -1,6 +1,7 @@
 import React from "react"
 import { createStackNavigator } from "react-navigation-stack"
 import { createBottomTabNavigator } from "react-navigation-tabs"
+import { createDrawerNavigator } from "react-navigation-drawer"
 import { createAppContainer } from "react-navigation"
 import { Platform } from "react-native"
 import Colors from "../constants/Colors"
@@ -11,6 +12,7 @@ import CategoriesScreen from "../screens/CategoriesScreen"
 import CategoryMealsScreen from "../screens/CategoryMealsScreen"
 import MealsDetailScreen from "../screens/MealsDetailScreen"
 import FavoritesScreen from "../screens/FavoritesScreen"
+import FiltersScreen from "../screens/FiltersScreen"
 
 const MealsNavigator = createStackNavigator({
   Categories: { screen: CategoriesScreen, navigationOptions: { headerTitle: "Meal Categories" } },
@@ -70,4 +72,15 @@ const MealsFavTabNavigator = Platform.OS === "android"
     }
   })
 
-export default createAppContainer(MealsFavTabNavigator)
+const FilterNavigator = createStackNavigator({
+  Filters: FiltersScreen,
+})
+
+
+
+const MainNavigator = createDrawerNavigator({
+  MealsFav: MealsFavTabNavigator,
+  Filters: FilterNavigator
+});
+
+export default createAppContainer(MainNavigator)
