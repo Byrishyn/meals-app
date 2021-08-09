@@ -1,13 +1,52 @@
-import React from "react"
-import { View, Text, StyleSheet } from "react-native"
-import {HeaderButtons, Item} from "react-navigation-header-buttons"
+import React, { useState } from "react"
+import { View, Text, StyleSheet, Switch, Platform } from "react-native"
+import { HeaderButtons, Item } from "react-navigation-header-buttons"
 
 import HeaderButton from "../components/HeaderButton"
+import Colors from "../constants/Colors"
+
+const FilterItem = props => {
+    return (
+        <View style={styles.filterContainer}>
+            <Text>{props.label}</Text>
+            <Switch
+                value={props.value}
+                onValueChange={props.onChange}
+                trackColor={{ true: Colors.primaryColor }}
+                thumbColor={Platform.OS === "android" ? Colors.primaryColor : ""}
+            />
+        </View>
+    )
+}
 
 const FilterScreen = props => {
+    const [isGlutenFree, setIsGlutenFree] = useState(false);
+    const [isLactoseFree, setIsLactoseFree] = useState(false);
+    const [isVegan, setIsVegan] = useState(false);
+    const [isVegetarian, setIsVegetarian] = useState(false);
     return (
         <View style={styles.screen}>
-            <Text>The Filter Screen !</Text>
+            <Text style={styles.title}>Available Filters / Restrictions</Text>
+            <FilterItem
+                label="Gluten-free"
+                value={isGlutenFree}
+                onChange={() => setIsGlutenFree(!isGlutenFree)}
+            />
+            <FilterItem
+                label="Lactose-free"
+                value={isLactoseFree}
+                onChange={() => setIsLactoseFree(!isLactoseFree)}
+            />
+            <FilterItem
+                label="Vegan"
+                value={isVegan}
+                onChange={() => setIsVegan(!isVegan)}
+            />
+            <FilterItem
+                label="Vegetarian"
+                value={isVegetarian}
+                onChange={() => setIsVegetarian(!isVegetarian)}
+            />
         </View>
     )
 }
@@ -25,8 +64,20 @@ FilterScreen.navigationOptions = (navData) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        justifyContent: "center",
         alignItems: "center",
+    },
+    title: {
+        fontFamily: "open-sans-bold",
+        fontSize: 22,
+        textAlign: "center",
+        margin: 20,
+    },
+    filterContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        width: "80%",
+        marginVertical: 10
     }
 })
 
