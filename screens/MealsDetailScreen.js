@@ -16,7 +16,7 @@ const MealsDetailScreen = props => {
 
     const availableMeals = useSelector(state => state.meals.meals)
 
-    const selectedMeal = MEALS.find((meal) => meal.id === mealId)
+    const selectedMeal = availableMeals.find((meal) => meal.id === mealId)
 
 
     return (
@@ -36,10 +36,9 @@ const MealsDetailScreen = props => {
 }
 
 MealsDetailScreen.navigationOptions = (navigationData) => {
-    const mealId = navigationData.navigation.getParam("mealId")
-    const selectedMeal = MEALS.find((meal) => meal.id === mealId)
+    const mealTitle = navigationData.navigation.getParam("mealTitle")
     return {
-        headerTitle: selectedMeal.title,
+        headerTitle: mealTitle,
         headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}><Item title="Favorite" iconName="ios-star" onPress={() => {
             console.log("favorite");
         }} /></HeaderButtons>
