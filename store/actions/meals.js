@@ -6,5 +6,5 @@ export const toggleFavorite = (id) => {
 }
 
 export const setFilters = filterSettings => {
-    return { types: SET_FILTERS, filters: filterSettings }
+    return { type: SET_FILTERS, filters: filterSettings }
 }
